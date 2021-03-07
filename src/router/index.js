@@ -5,6 +5,8 @@ const Home = () => import('views/home/Home')
 const Category = () => import('views/category/Category')
 const Cart = () => import('views/cart/Cart')
 const Profile = () => import('views/profile/Profile')
+const Detail = () => import('views/detail/Detail')
+
 
 Vue.use(VueRouter)
 
@@ -15,19 +17,43 @@ const routes = [
   },
   {
     path: '/home',
-    component: Home
+    component: Home,
+    meta: {
+      //设置显示true为显示，false为不显示
+      keepAlive: true
+    }
   },
   {
     path: '/category',
-    component: Category
+    component: Category,
+    meta: {
+      //设置显示true为显示，false为不显示
+      keepAlive: true
+    }
   },
   {
     path: '/cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      //设置显示true为显示，false为不显示
+      keepAlive: true
+    }
   },
   {
     path: '/profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      //设置显示true为显示，false为不显示
+      keepAlive: true
+    }
+  },
+  {
+    path: '/detail',
+    component: Detail,
+    meta: {
+      //设置显示true为显示，false为不显示
+      keepAlive: true
+    }
   }
 ]
 
