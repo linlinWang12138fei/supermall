@@ -1,20 +1,20 @@
 <template>
-  <div  v-if="Object.keys(detailGoods),length !== 0" class="detail-base-info">
-    <div class="detail-info-title">{{detailGoods.title}}</div>
-    <div class="detail-info-price">
-      <span class="new-price">{{detailGoods.newPrice}}</span>
-      <span class="old-price">{{detailGoods.oldPrice}}</span>
-      <span v-if="detailGoods.discount" class="discount">{{detailGoods.discount}}</span>
+  <div v-if="Object.keys(detailGoods).length !== 0" class="base-info">
+    <div class="info-title">{{detailGoods.title}}</div>
+    <div class="info-price">
+      <span class="n-price">{{detailGoods.newPrice}}</span>
+      <span class="o-price">{{detailGoods.oldPrice}}</span>
+      <span class="discount">{{detailGoods.discount}}</span>
     </div>
-    <div class="detail-info-other">
+    <div class="info-other">
       <span>{{detailGoods.columns[0]}}</span>
       <span>{{detailGoods.columns[1]}}</span>
-      <span>{{detailGoods.services[detailGoods.services.length - 1].name}}</span>
+      <span>{{detailGoods.services[detailGoods.services.length-1].name}}</span>
     </div>
-    <div class="detail-info-service">
+    <div class="info-service">
       <span class="info-service-item" v-for="index in detailGoods.services.length-1" :key="index">
-        <img :src="detailGoods.services[index - 1].icon" />
-        <span>{{detailGoods.services[index - 1].name}}</span>
+        <img :src="detailGoods.services[index-1].icon">
+        <span>{{detailGoods.services[index-1].name}}</span>
       </span>
     </div>
   </div>
@@ -35,33 +35,33 @@
 </script>
 
 <style scoped>
-  .detail-base-info {
+  .base-info {
     margin-top: 15px;
     padding: 0 8px;
     color: #999;
     border-bottom: 5px solid #f2f5f8;
   }
 
-  .detail-info-title {
+  .info-title {
     color: #222
   }
 
-  .detail-info-price {
+  .info-price {
     margin-top: 10px;
   }
 
-  .detail-info-price .new-price {
+  .info-price .n-price {
     font-size: 24px;
     color: var(--color-high-text);
   }
 
-  .detail-info-price .old-price {
+  .info-price .o-price {
     font-size: 13px;
     margin-left: 5px;
     text-decoration: line-through;
   }
 
-  .detail-info-price .discount {
+  .info-price .discount {
     font-size: 12px;
     padding: 2px 5px;
     color: #fff;
@@ -74,7 +74,7 @@
     top: -8px;
   }
 
-  .detail-info-other {
+  .info-other {
     margin-top: 15px;
     line-height: 30px;
     display: flex;
@@ -83,7 +83,7 @@
     justify-content: space-between;
   }
 
-  .detail-info-service {
+  .info-service {
     display: flex;
     justify-content: space-between;
     line-height: 60px;

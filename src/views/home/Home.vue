@@ -19,7 +19,9 @@
             @pullingup="loadMore">
       <home-swiper
         :banners="banner"
-        @swiperImageLoad="swiperImageLoad"></home-swiper>
+        @swiperImageLoad="swiperImageLoad"
+        ref="hSwiper">
+      </home-swiper>
       <home-recommend-view :recommends="recommends"/>
       <feature-view/>
       <tab-control :titles="titles"
@@ -28,7 +30,7 @@
       <goods-list :goods="showGoods"/>
     </scroll>
 <!--    如果想监听组件的事件，必须加上 .native, 比如：@click.native-->
-    <back-top @click.native="backTopClick" v-show="isShow"/>
+    <back-top @backtop="backTopClick" v-show="isShow"/>
   </div>
 </template>
 
@@ -48,6 +50,7 @@
   import {getHomeMultidata, getHomeGoods} from "network/home";
 
   import {debounce} from 'common/util'
+  import {BACKTOP_DISTANCE} from 'common/const'
 
 
   export default {
@@ -66,6 +69,7 @@
         isShow: false,
         tabOffsetTop: 0,
         isFixed: false,
+        currentPosition: 0
       }
     },
     computed: {
@@ -90,8 +94,20 @@
       this.mGetHomeGoods('pop');
       this.mGetHomeGoods('new');
       this.mGetHomeGoods('sell');
-
-
+    },
+    activated() {
+      // console.log('活跃');
+      // this.currentPosition = this.$store.state.homeCurrentPosition;
+      this.$refs.scroll.refresh();
+      this.$refs.scroll.scrollTo(0, this.currentPosition,0);
+      // this.$refs.hSwiper.startTimer();
+    },
+    deactivated() {
+      this.currentPosition = this.$refs.scroll.getCurrentY();
+      // console.log(this.currentPosition);
+      // console.log('离开');
+      // this.$store.commit('updataHCP', this.currentPosition)
+      // this.$refs.hSwiper.stopTimer();
     },
     mounted() {
       //图片加载完成的事件监听
@@ -107,7 +123,7 @@
 
     },
     destroyed() {
-      console.log('销毁');
+
     },
     methods: {
 
@@ -130,8 +146,9 @@
         this.$refs.tabControl2.currentIndex = index;
       },
       contentScroll(position) {
+        // this.currentPosition = position.y
         //返回顶部按钮是否显示
-        this.isShow = -position.y > 1000 ? true : false;
+        this.isShow = -position.y > BACKTOP_DISTANCE;
 
         //决定tabControl是否吸顶(position；fixed)
         this.isFixed = -position.y > this.tabOffsetTop
@@ -181,11 +198,6 @@
   #home{
     height: 100vh;
     position: relative;
-  }
-
-  #aaa{
-    width: 1px;
-    height: 1000px;
   }
 
   .home-nav{

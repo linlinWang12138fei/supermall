@@ -1,0 +1,852 @@
+VUE的安装：
+	方法一：直接CDN引入
+		你可以选择引入开发环境版本还是生产环境版本
+		<!-- 开发环境版本 -- !>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!--生产环境版本 -- !>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	方法二：下载和引入
+		开发环境：https://vuejs.org/js/vue.js
+		生产环境：https://vuejs.org/js/vue.min.js
+	方法三：NPM安装
+		
+什么叫响应式：当数据发生改变时，界面会发生一些响应
+
+什么是MVVM ：维基百科搜索MVVM
+
+什么是生命周期：事物从诞生到消亡的整个过程
+	created(){};这个函数是当组件被创建时调用的函数
+	mounted(){} 这个函数是当template里面的东西被挂载到dom里面后调用的函数。
+	updated(){} 当页面被刷新时执行的函数，数据刷新也是页面刷新
+
+ES6语法：对象的解构
+const obj = {
+	name,
+	age
+}
+在ES6里面可以这样取obj：const {name, age} = obj
+			console.log(name)
+
+
+Node安装：https://nodejs.cn/download/
+
+在style里面引用其他的文件：@import 
+
+导入文件里面的全部属性：import * as 名称 from '对应文件的路径'
+使用：名称.属性，名称.方法
+
+
+第一章小结
+一.邂逅Vuejs
+  1.1认识Vuejs
+	0）为什么要学习Vuejs
+	1）Vue的读音
+	2）Vue的渐进式
+	3）Vue的特点
+  1.2安装Vue
+	0）CDN引入
+	1）下载引入
+	2）npm安装
+  1.3Vue的初体验
+	0）Hello Vuejs
+		1. mustache语法->体验Vue的响应式
+	1）Vue的列表展示
+		1. v-for
+		2. 后面在、给数组追加元素的时候，新的元素页数可以在界面中渲染出来的
+	2）Vue的计数器小案例
+		1. 监听事件 v-on:click -> methods
+  1.4.Vue中的MVVM  看图
+  
+  1.5.创建Vue时，options可以放那些东西
+	0)el:
+	1)data:
+	2)methods:
+	3)生命周期函数（回调钩子函数）
+	4)computed:
+	5)components:  组件
+	6)match: 监听某一个属性的变化
+二.插值语法
+  1）mustache语法 {{}}
+  2）v-once  只会跟着数据改变一次
+  3）v-html 
+  4）v-text
+  5）v-pre : {{}}
+  6）v-cloak： 斗篷
+三.动态绑定属性，v-bind
+  3.1 v-bind绑定基本属性
+	1）v-bind:src
+	2)  :href
+  3.2 v-bind动态绑定class
+	1）对象语法 :class="{类名：boolean}"
+	2.）数组语法
+  3.3 v-bind动态绑定style
+	1）对象语法
+	2）数组语法
+四.计算属性
+  1）案例一：firstName + lastName
+  2）案例二：books -> price
+ 1.1计算属性的本质
+    fullname:{set(),get()}
+  1.2计算属性和methods对比
+    计算属性在多次使用时，只会调用一次
+    它是有缓存的
+五。事件监听
+  1.1事件监听的基本使用：v-on，语法糖：@
+  1.2参数问题
+    1.2.1没有传参可以不用写括号btnClick
+    1.2.2如果需要传参数但是没有传，会默认传浏览器的event对象：btnClick(event)
+    1.2.3如果同时传入参数又需要event对象时：btnClick('abc',event) -> $event
+  1.3修饰符
+    1.3.1 .stop
+    1.3.2 .prevent
+    1.3.3 .enter
+    1.3.4 .once
+    1.3.5 .native  监听组件的事件，不加的话是监听不到的
+六。条件判断
+  1.1 v-if/v-else-if/v-else
+  1.2 登录案例
+  1.3 v-show
+    v-show和v-if的区别：v-show只是把标签的display设为none，v-if是判断这个标签要不要渲染出来(存不存在)
+
+七。循环遍历
+  1.1遍历数组
+  1.2遍历对象
+    1.2.1 只拿value
+    1.2.2 拿value，key
+    1.2.3 拿value，key，index
+  1.3数组那些方法是响应式的**
+  1.4作业
+
+八。书籍案例
+
+九。v-model的使用（双向绑定）
+  1.1v-model的基本使用
+    1.1.1 v-model的本质：v-bind:value和v-on:input的结合
+  1.2 v-model在类型为radio/checkbox/select里的使用
+  1.3修饰符
+    1.3.1 .lazy(要用时才加载)
+    1.3.2 .number(定义类型为number)
+    1.3.1 .trim(去掉两边的空格)
+
+十。组件化开发
+  1.1认识组件化
+  1.2组件的基本使用
+  1.3全局组件和局部组件
+  1.4父组件和子组件
+  1.5组件注册的语法糖
+  1.6模板的分离写法
+    写法一：script
+    写法二：template
+  1.7数据的存放
+    1.7.1子组件不能直接访问父组件
+    1.7.2子组件中有自己的data，而且必须是一个函数
+    1.7.3为什么必须是一个函数，因为不是函数的话会影响其他组件
+  1.8父子组件的通信
+    1.8.1父传子：props
+    1.8.2子传父：$emit
+
+
+
+****。什么是组件化：
+就是把一个大问题拆分成许多个小问题，
+如果我们将一个页面中所有的处理逻辑全部放在一起，这样出来起来就会变得非常的复杂，而其不利于后期的管理和扩展，
+但如果，我们将一个页面拆分成一个个小的功能模块，每个功能块完成属于自己这部分独立的功能，那么之后整个页面的管理和维护就变得非常的容易了。
+
+Vue组件化思想：
+组件化是Vue.js中的重要思想，它提供了一种抽象，让我们可以开发出一个个独立可复用的小组件来构造我们的应用。任何的应用都会被抽象成一个组件树。
+
+<*组件的使用三步骤：>
+1.创建组件构造器：调用Vue.extend(); 方法来创建组件构造器
+2.注册组件：调用Vue.component()；方法来注册组件，component组件的意思
+3.使用组件：在Vue实列的作用范围内使用组件
+
+步骤解析：
+1.调用Vue.extend()创建的是一盒组件构造器，通常在创建组件构造器时，会传入
+template代表自定义组件的模板，该模板就是在使用组件的地方要显示的HTML代码。事实上，这种写法在Vue2.x的文档中几乎已经看不到了，它会直接使用语法糖，但是在很多资料上还是会提到这种方式，而且这种方式是学习后面方法的基础。
+2.调用Vue.compnent()是将组件构造器注册为一个组件，并且给他起一个组件的标签名称。所以需要传入两个参数：参数1、注册组件的标签名称，参数2、组件构造器。
+3.组件必须挂载在某个Vue实例下，否则它不会生效。
+
+
+***组件 插槽
+  作用：让组件具有更好的扩展性
+  定义：<slot name="**"></slot>
+  使用：<div slot="**"></div>
+
+
+webpack详解
+  一：什么是webpack？
+	从本质上讲，webpack是一个现代的JavaScript应用的静态 *模块打包* 工具
+	从两点来解释上面这句话：模块和打包
+	是一个 前端模块化打包工具
+
+	下载时加上 -dev 代表开发时依赖，就是只有在开发时才用。
+
+  二：安装webpack
+	想让webpack正常运行，必须依赖node环境，
+	node环境为了可以正常的执行很多代码，必须其中包含各种依赖的包
+	npm工具（node packages manager）
+	
+	安装webpack首先需要安装Node.js，Node.js自带了软件包管理工具npm
+	查看自己的node版本 在cmd里执行node -v
+	（全局）安装nodejs完成之后，在安装webpack，通过运行=>cmd,输入"npm install -g webpack@<version> ',-g表示全局安装，version表示版本号，
+	（局部）安装：npm install webpack@3.6.0 --save-dev
+  
+  三：webpack的起步
+	1.一般在目录里面要有两个文件夹，src和dist，src：源码，dist源码完成后打包到这个文件夹
+	
+	2.打包：webpack ./src/main.js ./dist/bundle.js。./src/main.js：是需要进行打包的地方/文件名，./dist/bundle.js：打包后的地方/文件名
+	
+	3.如果在项目中需要使用node，首先需要把依赖包建好，输入：npm init，如果依赖了其他的包，则在输入：npm install
+
+	4.将webpack映射成其他名称
+		第一步：打开package.json文件
+		第二步：找到scripts
+		第三步：添加一个 "名称"："需要执行的命令"，例如："build": "webpack" , 分割
+		第四步：执行命令：npm run 名称
+
+	5.什么是loader？
+		如我们需要将一些高级的如ES6转为ES5，将TypeScript转为ES5代码
+		，将scss、less转为css，将.jsx、.vue文件转成js等等。这个时候就需要用到，loader
+	
+	6.loader使用过程
+		步骤一：通过npm安装需要使用的loader
+		步骤二：在webpack.config.js中的modules关键字下进行配置
+	注意：如果找不到需要安装的loader的命令,浏览器输入：webpackjs.com => 上方的中文文档 => 右上角的 LOADERS => 选择对应的loaders(如：样式) => 在选择对应的样式(如：css-loader)，
+	注意：css-loader 的版本要和webpack的版本一样
+	
+	css-loader: 只负责将css文件进行加载，不负责解析，也不负责将内容放到html里加载
+	style-loader：负责将样式添加到DOM中
+
+	图片相关的loader
+	*url-loader：加载图片的loader
+		下载：npm install url-loader --save-dev
+		
+	*url-loader注意事项：
+		当加载的图片小于limit时，会将图片加载为base64字符串形式
+		当加载的图片大于limit时，需要使用file-loader模块进行加载，不需要配置
+	但是，使用file-loader时，需要在webpack.config.js的output里面添加一个属性：publicPath: "存放路径"
+
+	file-loader的版本要和webpack的版本差不多，比如webpack@3.6.0，file-
+loader@4.0.0
+	
+	*对图片进行一些规范：
+		比如图片在最后打包到dist文件夹里面时，添加一个img文件夹，把图片装到里面，然后在对图片名称做规范：原来的名字+hash:8+后缀。
+		怎么加呢？：在webpack.config.js里面的url-loader模块的use里的options里添加一个name属性，其值为："img/[name].[hash:8].[ext]"
+	
+	ES6转ES5相关的loader
+		babel-loader安装：npm install --save-dev babel-loader@7 babel-core babel-preset-es2015
+		在配置的时候需要把options里的presets改为'es2015' 和上面的一样
+
+	Vue * webpack配置和Vue相关的东西
+		第一步：通过npm安装：npm install vue --save 不需要加-dev
+		第二步：在需要用的地方进行导入：import Vue from 'vue'，然后进行挂载
+			new Vue({
+				......
+			});
+	
+		第三步：  在运行时发现vue的两个版本，
+			runtime-only -> 代码中，不可以右任何的template
+			runtime-compiler -> 代码中，可以有template，因为有compiler可以用于编译template
+		需要使用runtime-compiler版本时，需要在webpackconfig.js进行配置，内容和entry和output并列，配置如下
+		resolve: {
+			//alias: 别名
+			alias: {
+				'vue$': 'vue/dist/vue.esm.js'
+			}
+		}
+	el和template的关系：
+		如果一个vue实列里面同时有el和template，那么vue内部自动会把template的内容替换到el处
+	以后写vue相关的东西就可以创建一个Vue component文件，简称  .vue文件
+
+	安装vue-loader：
+		npm install vue-loader vue-template-compiler --save-dev
+	配置vue-loader的webpack.config.js
+
+	如果想在加载其他类型的文件时省略后缀，需要在webpack.config.js配置文件里的resolve里添加属性：extensions:['.js','.vue','.vue']
+
+	webpack的plugin
+		认识plugin
+		plugin是什么？
+			plugin是插件的意思，通常是用于对某个现有的架构进行扩展
+			webpack中的插件，就是对webpack现有功能的各种扩展，比如打包优化，文件压缩等等
+		plugin和loader的区别
+			loader主要用于转换某些类型的模块，它是一个转换器
+			plugin是插件，它是对webpack本身的扩展，是一个扩展器
+		plugin的使用过程
+			步骤一：通过npm安装需要使用的plugins(某些webpack已经内置的插件不需要安装)
+			步骤二：在webpack.config.js中的plugins中配置插件
+		添加版权的plugin
+			第一步：导入webpack：const webpack = require('webpack')
+			第二步：plugins: [new webpack.BannerPlugin('最终版权归XXX所有')]
+		注意：plugins和output并列
+		
+		打包html的plugin（HtmlWebpackPlugin）
+			安装插件：npm install html-webpack-plugin@3.2.0 --save-dev
+			导入插件：const HtmlWebpackPlugin = require('html-webpack-plugin')
+			使用插件：添加webpack.config.js文件中plugins部分内容如下：new htmlWebpackPlugin({template: 'html模板文件路径'})
+
+		js文件压缩的plugin(丑化)：在开发阶段不建议使用，在发布阶段才需要
+			安装：npm install uglifyjs-webpack-plugin@1.1.1 --save-dev
+			导入：const uglifyJsPlugin = require('uglifyjs-webpack-plugin');
+			添加一个webpack.config.js文件的plugins：new uglifyJsPlugin();
+
+
+	搭建本地服务器：在开发阶段时才需要
+		webpack提供了一个可选的本地开发服务器，这个本地服务器基于node.js搭建，内部使用express框架，可以实现我们想要的让浏览器自动刷新显示我们修改的结果。
+		它不是一个单独的模块，在webpack中使用之前必须先安装它：npm install --save-dev webpack-dev-server@2.9.3。
+		devserver也是作为webpack中的一个选项，选项本身可以设置如下属性：
+			contentBase：为哪一个文件夹提供本地服务，默认是跟文件夹，我们这里要填./dist
+			port：端口号
+			inline：页面实时刷新
+			historyApiFallback：在SPA页面中，依赖HTML5的history模式
+		webpack.config.js文件配置如下：
+			derServer: {
+				contentBase: './dist',
+				inline: true
+			}
+		可以在配置一个scripts：
+			--open参数标识直接打开浏览器
+			"dev": "webpack-dev-server --open"
+	
+	webpack.config.js配置文件分离，分：开发阶段和发布阶段，如下：
+		把webpack.config.js文件分离到build文件夹下面的三个文件，一个公共的，一个生产时需要的，一个开发时需要的
+		下载：npm install webpack-merge@4.1.5 ，版本问题注意。
+		导入：const webpackMerge = require('webpack-merge');
+		在导入需要合并的那个文件，比如：const baseConfig = require('./base.config');
+		使用：module.exports = 		webpackMerge(baseConfig,{
+ 			 plugins: [
+    				new uglifyJS(),
+			  ],
+		});
+		需要更改package.josn文件，如下：
+			"build": "webpack --config 	./build/prod.config.js",
+   			 "dev": "webpack-dev-server --open --config ./build/dev.config.js"
+
+
+Vue的CLI（脚手架）：
+	官网：cli.vuejs.org
+	CLI是什么意思？
+		CLI是Command-Line Interface，翻译为命令行界面，俗称脚手架。
+		Vue CLI是一个官方发布Vue.js项目脚手架。
+		使用cue-cli可以快速搭建Vue开发环境以及对应的webpack配置。
+
+	CLI依赖node和webpack环境
+
+	CLI（脚手架）的使用
+		安装：npm install -g @vue/cli
+		以上安装的是脚手架3
+		在项目中需要用到脚手架2时，需要拉取CLI 2.x的模板：
+			拉取CLI2：npm install -g @vue/cli-init
+	
+	Vue CLI 2初始化项目:
+		vue init webpack my-project
+
+	Vue CLI 3初始化项目：
+		vue create my-project
+
+	runtime-compiler和runtime-only的区别：
+		runtime-only性能更高，代码量更少
+	通过CLI3初始化项目修改配置
+		方法一：命令行输入 vue ui
+		方法二：在跟目录下创建一个vue.config.js文件，手动修改
+		
+前端路由
+  1。什么是路由
+	路由是一个网络工程里面的术语
+	路由就是通过互联的网络把信息从源地址传输到目的地址的活动 --维基百科
+  2.路由提供了两种机制：路由和转送
+	路由：是决定数据包从来源到目的地的路径
+	转送：是将输入端的数据转移到合适的输出端
+  3.路由中有一个非常重要的概念叫路由表
+	路由表的本质上就是一个映射表，决定了数据包的指向
+
+什么是前端渲染什么是后端渲染？
+	
+	1.后端路由就是：后端处理URL和页面之间的映射关系
+		一个页面有自己对应的网址，也就是URL。
+		URL会发送到服务器，服务器会通过正则对该URL进行匹配，并且最后交给一个Controller(控制器)进行处理。
+		Controller(控制器)进行各种处理，最终生成HTML或者数据，返回前端。
+		这就完成了一个IO操作。
+	2.前后端分离阶段
+		随着Ajax的出现，有了前后端分离的开发模式
+		后端值提供API来返回数据，前端通过Ajax获取数据，并且可以通过javascript将数据渲染到页面中
+		这样做的最大优点就是前后端责任的清晰，后端专注于数据上，前端专注于交互和可视化上
+		并且当移动端(IOS/Android)出现后，后端不需要进行任何的处理，依然使用之前的一套API即可
+		目前很多的网站依然采用这种开发模式
+	3.单页面富应用阶段（SPA页面，前端路由阶段）
+		其实SPA最主要的特点就是在前后端分离的基础上加上了一层前端路由
+		也就是前端来维护的一套路由规则
+	4.当浏览器的url改变时不让浏览器刷新的方式
+		方式一：URL的hash：location.hash = ""
+		方式二：HTML5的history模式：history.pushState(data, title, url)，这个方式类似于栈结构，history.back()；移除最上面的一个(就是返回上一级)
+		方式三：HTML5的history模式：history.replaceState({},'','url');替换上一个url，不可以返回上一级
+		方式四：HTML5的history模式：history.go()，history.go(数值) 等同于 history.back(); 
+		方式五：HTML5的history模式：history.fowward() 等同于 history.go(1)；
+
+		安装vue-router：
+			npm install vue-router --save
+			第一步：导入路由对象，并且调用Vue.use(VueRouter)
+			第二步：创建路由实例，并且传入路由映射配置
+			第三步：在Vue实例中挂载创建的路由实例
+		
+		使用vue-router：
+			第一步：创建路由组件
+			第二步：配置路由映射：组件和路径映射关系
+			第三步：使用路由：通过<router-link>和<router-view>
+				<router-link>：绑定组件
+					to属性： to="/路径"，
+					tag属性：<router-link>默认会变成一个a标签，tag="button"  更改按钮为button
+					当不想用户随意的点返回上一个页面时，在这个标签上加一个属性：replace="replace"
+					active-class="值"，作用：更改class为值
+					统一修改<router-link>的class，在new Router里面加一个属性：linkActiveClass: 'active'
+				<router-view>：组件渲染的地方(站位)
+		
+		配置路由的默认路径
+			const routes = [
+				{
+				  path:'/',
+				  redirect: '/home'
+				}
+			]
+		项目创建时默认的是hash模式，更改为history模式，在new Router里面加一个属性，mode: 'history'
+		动态的url：在routes里面对应的path后面加上/:user_id(名称)，然后在对应的按钮的url后面也要跟值
+
+	this.$route：那个路由处于活跃状态就代表那个路由
+
+	认识路由的懒加载
+		懒加载就是：要用到的时候才加载
+		写法：
+			const Home = () => import('对应组件的路径');
+			const routes = [
+				{
+					path: '/home',
+					component: Home
+				}
+			]
+		
+	认识嵌套路由
+		嵌套路由是一个常见的功能
+		比如在home页面中，我们希望通过/home/news和/home/message访问一些内容，一个路径映射一个组件，访问这两个路径也会分别渲染两个组件
+		实现嵌套路由的两个步骤
+			第一步：创建对应的子组件，并且在路由映射中配置对应的子路由
+			第二步：在对应的父组件内部使用<router-view>标签，在对应的<router-link>标签的to属性里的路径需要写完整
+
+	传递参数的方式
+		方式一 params类型：
+			配置路由格式：/user/:id
+			传递的方式：在path(to属性)后面跟上对应的值
+			传递后形成的路径：/router/123，/router/abc
+			其他地方拿参数：this.$route.params.冒号后面对应的名称(比如：this.$route.params.id)
+
+		方式二 query类型：
+			配置路由格式：/router，普通配置就行
+			传递方式：对象中使用query的key作为传递方式
+			传递后形成的路径：/router?id=123，/router?id=abc
+
+			写法一：:to="{path: '/router', query: {name: '**', age: '**'}}"
+			写法二：this.$router.push({path: '/router', query: {name: '**', age: '**'}});
+			接收参数方法：this.$route.query.name
+			
+
+	$router 和$route 的区别：
+		$router是VueRouter对象。
+		$route是路由，哪一个路由处于活跃状态就代表哪一个
+
+	什么是导航守卫？
+		就是监听从哪里跳到哪里。
+	使用全局导航守卫：
+		在router的index.js里面使用router.beforeEach();
+	路由独享守卫：
+		const routes = [
+			{
+      				path: '/user/:user_id',
+      				component: User,
+      				meta: {//更改每页的title
+      					title: '用户页'
+      				},
+      				beforeEnter: (to, from, next) => {//路由独享守卫
+        					console.log('......');
+        					next();
+     				}
+    			}
+		]
+	详情请看：https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%85%A8%E5%B1%80%E5%89%8D%E7%BD%AE%E5%AE%88%E5%8D%AB
+
+
+	keep-alive 是Vue内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染，意思就是这个组件不用被频繁的创建，销毁。
+	keep-alive的属性：
+		include - 字符串或者正则表达式，只有匹配到的组件会被缓存，值是对应组件的name，多个组件用逗号分割，name1,name2 这里逗号后面不要加空格
+		exclude - 字符串或者正则表达式，任何匹配到的组件都不会被缓存，值是对应组件的name，多个组件用逗号分割，name1,name2 这里逗号后面不要加空格
+	router-view 也是一个组件，如果直接被包在keep-alive里面，那么 所有路径匹配到的使徒组件都会被缓存
+
+	起别名：在项目下的build里的webpack.base.conf.js里面的resolve的alias里面加，比如：'assets': '对应的路径'
+	使用别名：
+		在import处使用：assets
+		在属性src出使用：~assets
+
+
+ES6中的Promise(一般情况下是有异步操作时使用：Promise 进行封装)
+	Promise是做什么的？
+		Promise是异步编程的一种解决方案
+	
+	Promise的使用：
+		new Promise((resolve, reject) => {
+    			setTimeout(() => {
+      				resolve(data);
+				reject(err);
+    			}, 1000);
+  		}).then(data => {
+			
+		}).catch( err => {
+			
+		})
+		
+		resolve：是在请求成功时执行的方法
+		一旦在Promise里面使用了 resolve() 方法，那么在它就会执行then这个函数
+
+		reject：是在请求成功时执行的方法
+		一旦在Promise里面使用了 reject() 方法，那么在它就会执行catch这个函数
+
+	Promise的三种状态
+		pending：等待状态，比如正在进行网络请求，或者定时器没有到时间。
+		fulfill：满足状态，当主动回调了resolve时，就处于该状态，并且会回调.then()
+		reject：拒绝状态，当主动回调了reject时，就处于该状态，并且回调.catch()
+		
+
+	当同时需要发送多个请求，并且需要同时得到这几个请求的结果时，使用Promise.all方法
+		Promise.all([
+      			new Promise( resolve => {
+        				setTimeout( () => {
+          					resolve({name: 'why', age: 18});
+        				},2000)
+      			}),
+    			new Promise( resolve => {
+      				setTimeout( () => {
+        					resolve('result2');
+      				},2000)
+    			})
+  		]).then( result => {
+    			//result[0] 就是第一次请求的结果
+    			//result[1] 就是第二次请求的结果
+    			//。。。。
+    			console.log(result);
+  		})
+	Promise的链式调用：G:\vue\练习\learnVuejs04\learnvuejs04\01-Promise的使用
+	Promise的简写：G:\vue\练习\learnVuejs04\learnvuejs04\01-Promise的使用
+		
+
+
+Vuex是做什么的（大管家）
+	官方解释：Vuex是一个转为Vue.js应用程序开发的 状态管理模式
+	Vuex是响应式的
+	它采用 集中式存储管理 应用的所有组件的状态，并以相应的贵州保证状态以一种可预测的方式发生变化
+	Vuex也集成到Vue官方雕塑工具devtools extension，提供了诸如零配置的 time-tracel调试、状态快照导入导出等高级调试
+	状态管理是什么？
+		简单来说就是，需要多个组件共享的变量全部存储到一个对象里面
+	什么时候用Vuex，当多个页面都需要使用这个状态时使用Vuex
+
+	vuex下载：npm install vuex --save
+	vuex导入：import Vuex from 'vuex'
+	vuex安装：Vue.use(Vuex)
+	vuex创建：const store = new Vuex.Store({})
+	vuex挂载：store 
+
+	vuex修改：
+
+
+	vuex的几个核心的概念：
+		1.State：存放状态的，只有在一开始的时候添加的数据才是响应式的，如果是后面通过某些方式加上去的数据就不是响应式的。那么如何解决这个问题呢，
+			解决方法一：使用Vue.set(对象，key，value)方法来解决
+			解决方法二：使用Vue.delete(对象，key)方法来删除数据是响应式的
+			写：state: {counter: 0}
+			用：
+				js: this.$store.state.counter
+				mustache:$store.state.counter
+
+		2.Getters：类似于计算属性，当我们某一个数据经过一些变化时，使用计算属性
+			写：getters: {
+				a(state){
+					return state.counter * state.counter
+				}
+			}
+			用：{{$store.getters.a}}
+
+		3.Mutation：状态更新，Vuex的store状态更新的唯一方式，只能存放一些同步函数，这样可以使devtools工具捕捉，异步函数不能捕捉，不利于调试
+			提交风格一：this.$store.commit('incrementCount', count);
+			提交风格二：this.$store.commit({
+        					type: 'incrementCount',
+        					count
+      				    })
+
+		4.Actions：做异步操作
+			如果在这里面想修改状态，请使用Mutation提交，不能直接修改，使用commit('mutation对应方法名称')
+			Action提交：this.$store.dispatch('Actions对应方法名称');
+			传递参数和mutations一样的
+			那么如何判断里面是否执行成功了呢？
+			解决办法：
+				在Actions里面：[对应方法] (context, payload) {
+						return new Promise( (resolve, reject) => {
+								setTimeout( () => {
+								//....执行需要执行的代码
+								//然后在调用commit方法之后使用 resolve('可以传参');
+							})
+						})
+					         }
+				在使用dispatch这里：
+					this.$store.dispatch('Actions对应方法名称', '参数').then( res => {
+						console.log(res);
+					})
+
+		5.Module：划分模块
+			在这个里面可以定义模块：如下
+				modules： {
+					a模块: {
+						state:{
+							name: 'a模块的name'
+						},
+						mutations: {},
+						getters: {},
+						actions:{}
+					},
+					b模块: {
+						state:{},
+						mutations: {},
+						getters: {},
+						actions:{}
+					},
+					b模块: {
+						state:{},
+						mutations: {},
+						getters: {},
+						actions:{}
+					},
+				}
+			使用（模块相关）-----------
+				获取模块a的state：this.$store.state.对应模块名称.对应属性，比如 $store.state.a模块.name
+				使用模块a里面的mutations：this.$store.commit('模块a里面对应的方法', '携带的参数')，注意模块里面的函数名称 不能 和store对象里面的mutations里的函数名称相同
+				使用模块a里面的getters：this.$store.getters.模块a里getters对应函数名称，注意模块里面的函数名称 不能 和store对象里面的getters里的函数名称相同
+				在模块a的getters里获取store里面的state：方法(context，参数，rootState){ rootState.store里state对应的属性 }
+				使用模块a的actions：
+						定义：方法名称(context){
+							//注意：这里的context只代表自己，不代表 store对象，context.commit只能提交到自己对象的mutations的方法，
+							//不能提交到store里的mutations的方法
+							setTimeout( () => {
+        								context.commit('updaName', '李四');
+      							}, 1000)
+						}
+						使用：this.$store.dispatch('模块a里actions对应的函数名称')；
+
+	为了防止写错，那么就搞一个静态常量来装这些名字，在一个常量的js文件里
+		定义常量：export const INCREMENT = 'increment'
+		使用常量：
+			第一步：导入 import { INCREMENT  } from '对应的常量js路径'
+			第二步：使用名称即可，方法也可以这样定义 -> [ INCREMENT ] () {}
+
+	Vuex的项目结构：G:\vue\练习\learnVuejs04\learnvuex\src\store
+
+
+
+Axios
+	安装：npm install axios --save
+	导入：import axios from "axios";
+	使用：axios({
+		url: ''
+	}).then( res => {
+		console.log(res)
+	})
+
+
+	axios支持多种请求方式：
+		axios(config)
+		axios.request(config)
+		axios.get(url, [data])
+		axios.delete(url, [config])
+		axios.head(url, [config])
+		axios.post(url, [data, [config]])
+		axios.put(url, [data, [config]])
+		axios.patch(url, [data, [config]])
+	axios的全局配置
+		写：axios.defaults.名称 = '值'
+		如：axios.defaults.baseURL = 'http://123.207.32.32:8000'
+		       axios.defaults.timeout = 5000
+		用：
+			没有全局配置时：url: 'http://123.207.32.32:8000/home/multidata'
+			有全局配置时：url: '/home/multidata'
+
+
+	axios的并发请求：
+		axios.all([
+  			//网络请求一
+  			axios({
+    				url: 'http://123.207.32.32:8000/home/multidata'
+ 			 }),
+  			//网络请求二
+  			axios({
+    				url: 'http://123.207.32.32:8000/home/data',
+    				params: {
+      					type: 'sell',
+      					page: 4
+    				}
+  			})
+		]).then( results => {
+  			console.log(results);
+  			console.log(results[0]);
+  			console.log(results[1]);
+		})		
+
+
+	axios可以全局配置的属性：
+		请求地址：url
+		请求类型：method
+		请求跟路径：baseURL
+		请求钱的数据处理：transfromRequest: [function(data){}]
+		请求后的数据处理：transfromResponse: [function(data){}]
+		自定义的请求头：headers:{'x-Requested-With':'XMLHttpRequest'}
+		URL查询对象：params: {id:12}
+		request body，当请求是post时，数据一个放在这里：data{key: 'aaa'}
+
+
+	当需要同时使用多个服务器时，那么就创建对应的axios实例：
+		创建：
+			const instance1 = axios.create({
+  				//局部(instance1) 的全局配置
+  				baseURL: 'http://123.207.32.32:8000',
+  				timeout: 10000
+			})
+		使用：
+			instance1({
+  				url: '/home/multidata'
+			}).then( res => {
+  				console.log(res);
+			})
+
+
+
+	网络请求封装：	
+		为什么要进行封装？因为这样可以防止使用的第三方插件突然出意外之后使代码很难修改
+		创建文件：跟目录 -> src -> network ->request.js
+		详情请看：G:\vue\练习\learnVuejs-05axios\learnaxios\src\network
+		
+
+	axios拦截器
+		用于在发送每次请求或者得到响应后，进行对应的处理
+	使用拦截器：
+		
+
+
+如何将一个项目发布到GitHub上
+	git status 查看状态
+	1.安装 Git-2.25.1-64-bit.exe，网盘里有
+	2.创建项目 vue/cli3
+	3.到官网把仓库建好 -> github.com ->右上角加号点击new repository
+
+	如果没有SSH协议：
+		1.右上角头像 -> 点击settings
+		2.找到SSH and GPG keys
+		3.右上角 new SSH key
+		4.创建key -> title 随便写 -> key: 在安装git的那个终端(git bash)输入：ssh-keygen -t id_rsa ->查看公钥的命令: cat ~/.ssh/id_rsa.pub，生成密钥：ssh-keygen -t id_rsa -C
+		创建和生成密钥网站：https://www.cnblogs.com/daiyu5577/p/7967797.html
+
+	4.项目跟目录 -> git clone github对应仓库地址 -> git add .  -> git commit -m '初始化项目'  -> git push --set-upstream url地址 master
+	
+	如何将git本地创建的项目推送到github仓库 网站：https://www.cnblogs.com/tdcqma/p/6715829.html
+
+
+
+添加到远程GitHub的第二种方式
+	项目目录下执行：1. git remote add origin 仓库url
+		           2. git push -u origin master
+	
+
+
+
+
+创建项目：
+	第一件事情：项目结构划分：划分目录
+		src -> assets(资源) -> img,css
+		src -> common(公共的常量，工具类等等)
+		src -> components -> common(在其他项目也可能使用到的一些东西)，content(在这个项目用到的一些公共的东西)
+		src -> network(网络相关)
+		src -> router(路由相关)
+		src -> store(公共状态管理相关)
+		src -> views(视图相关) -> home(一个视图一个文件夹)
+
+	2.引用两个CSS文件
+	3.cli3 对文件夹起别名，导入.editorconfig
+	4.项目的模块划分 -> tabbar
+
+
+
+
+
+
+
+
+
+cli3 对文件夹起别名
+	创建: vue.config.js
+		module.exports = {
+  			configureWebpack: {
+    				resolve: {
+      					alias: {
+        						'assets': '@/assets',
+        						'common': '@/common',
+        						'components': '@/components',
+        						'network': '@/network',
+       				 		'views': '@/views',
+      					}
+    				}
+  			}
+		}
+
+
+
+下载better-scroll（让移动端滑动不卡顿）
+	下载：npm install better-scroll --save 
+	使用：
+	dom界面：
+		<div class="wrapper">
+			<div class="content">内容。。。。</div>
+		</div>
+	注意：只能让wrapper的第一个子元素出现这种滚动
+	js界面：
+		mounted() {
+     			new BScroll('id/class/ref/...', {});
+    		}
+	注意：'id/class/ref/...要添加确定的高度，看需求添加overflow: hidden;
+
+
+css里面的：
+	height: 100vh;
+	vh：适口
+
+
+better-scroll 常用配置：
+https://blog.csdn.net/weixin_46351593/article/details/113790753?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161504306816780255242845%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=161504306816780255242845&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-2-113790753.first_rank_v2_pc_rank_v29&utm_term=observeDOM
+
+
+
+
+this.$bus：事件总线的使用
+	注册：在main.js中 -> Vue.prototype.$bus = new Vue();
+	发射事件总线：this.$bus.$emit('方法名称')
+	监听事件总线：this.$bus.$on('发射总线的方法名称', () => {//.....})
+
+
+防抖&节流：
+	防抖：debounce
+	节流：throttle
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

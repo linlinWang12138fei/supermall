@@ -1,5 +1,5 @@
 <template>
-  <div class="back-top">
+  <div class="back-top" @click="topClick">
     <img src="~assets/img/common/top.png">
   </div>
 </template>
@@ -7,6 +7,12 @@
 <script>
   export default {
     name: "BackTop",
+    methods: {
+      topClick() {
+        this.$emit('backtop')
+      }
+    }
+
   }
 </script>
 

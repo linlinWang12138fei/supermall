@@ -34,13 +34,14 @@
         pullUpLoad: this.spullUpLoad,
         click: true,
         mouseWheel: true,
-        // observeDOM: true,
-        // observeImage: true,
+        observeDOM: true,
+        observeImage: true,
       });
       //监听滚动事件
       if(this.probeType === 2 || this.probeType === 3){
         this.scroll.on('scroll', position => {
-          this.$emit('scroll', position)
+          this.$emit('scroll', position);
+
         })
       }
       //监听上拉加载事件
@@ -58,8 +59,10 @@
         this.scroll && this.scroll.finishPullUp()
       },
       refresh() {
-        console.log('--');
         this.scroll && this.scroll.refresh();
+      },
+      getCurrentY() {
+        return this.scroll.y ? this.scroll.y : 0
       }
     }
   }

@@ -1,7 +1,6 @@
 <template>
   <div class="goods-item" @click="goodsItemClick">
-    <img
-      :src="goodsItem.show.img" @load="imgLoad"/>
+    <img :src="getImg" :key="getImg" @load="imgLoad"/>
     <div class="goods-info">
       <p>{{goodsItem.title}}描述</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -36,7 +35,12 @@
           }
         })
       }
-    }
+    },
+    computed: {
+     getImg() {
+       return this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
+     }
+    },
   }
 </script>
 

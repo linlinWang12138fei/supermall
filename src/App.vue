@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <keep-alive exclude="Detail" include="Home">
-      <router-view v-if="this.$route.meta.keepAlive"/>
+    <keep-alive exclude="Detail">
+      <router-view/>
     </keep-alive>
     <main-tab-bar/>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <swiper>
+  <swiper ref="sw">
     <swiper-item v-for="item in banners">
       <a :href="item.link">
         <img :src="item.image" @load="imageLoad" />
@@ -38,6 +38,13 @@
         if (!this.isLoad)
         this.$emit("swiperImageLoad")
         this.isLoad = true
+      },
+
+      startTimer() {
+        this.$refs.sw.startTimer();
+      },
+      stopTimer() {
+        this.$refs.sw.stopTimer();
       }
     }
   }
