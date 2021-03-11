@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="goodsItemClick">
-    <img :src="getImg" :key="getImg" @load="imgLoad"/>
+    <img v-lazy="getImg" :key="getImg" @load="imgLoad"/>
     <div class="goods-info">
       <p>{{goodsItem.title}}描述</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -20,8 +20,6 @@
         }
       },
     },
-    created() {
-    },
     methods: {
       imgLoad() {
         //发射事件总线
@@ -31,9 +29,28 @@
         this.$router.push({
           path: '/detail',
           query: {
-            iid: this.goodsItem.iid
+            iid: this.goodsItem.iid || this.goodsItem.shop_id
           }
         })
+        // if(this.$route.path.indexOf('/home')){
+        //
+        // }else if(this.$route.path.indexOf('/detail')){
+        //   this.$router.push({
+        //     path: '/detail',
+        //     query: {
+        //       iid: this.goodsItem.shop_id
+        //     }
+        //   })
+        // }
+        // this.id = this.goodsItem.iid !== undefined ? this.goodsItem.iid : (this.goodsItem.shop_id !== undefined ? this.goodsItem.shop_id : undefined)
+        //
+        // console.log(this.id);
+        // this.$router.push({
+        //   path: '/detail',
+        //   query: {
+        //     iid: this.id
+        //   }
+        // })
       }
     },
     computed: {
@@ -48,8 +65,6 @@
   .goods-item {
     padding-bottom: 40px;
     position: relative;
-
-    width: 48%;
   }
   .goods-item img {
     width: 100%;

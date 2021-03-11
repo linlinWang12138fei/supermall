@@ -13,10 +13,10 @@
       <detail-coment-info :comment-info="commentInfo"  ref="commentInfo"/>
       <detail-recommend-info :recommend-list="recommendList"  ref="recommendList"/>
     </scroll>
-    <detail-tab-bar/>
+    <detail-tab-bar @addtocart="addToCart"/>
 
-    <back-top @backtop="backTop" v-show="showBackTop"/>
-
+    <back-top @backtop="backTopClick" v-show="isShow"/>
+    <toast/>
   </div>
 </template>
 
@@ -31,7 +31,7 @@
   import DetailComentInfo from "./childComps/DetailComentInfo";
   import DetailRecommendInfo from "./childComps/DetailRecommendInfo";
   import DetailTabBar from "./childComps/DetailTabBar";
-  import BackTop from "components/content/backTop/BackTop";
+  import Toast from "components/common/toast/Toast";
 
   import Scroll from "components/common/scroll/Scroll";
 
@@ -39,8 +39,12 @@
 
   import {BACKTOP_DISTANCE} from "common/const";
 
+  //混入
+  import {itemListenerMixin, backTopMixin} from "common/mixin";
+
   export default {
     name: "Detail",
+    mixins: [itemListenerMixin, backTopMixin],
     data() {
       return {
         iid: null,
@@ -53,7 +57,6 @@
         recommendList: [],
         themeTops: [],
         currentIndex: 0,
-        showBackTop: false
       }
     },
     components: {
@@ -67,7 +70,7 @@
       DetailComentInfo,
       DetailRecommendInfo,
       DetailTabBar,
-      BackTop
+      Toast
     },
     created() {
       //1.保存传入的iid
@@ -75,13 +78,13 @@
       //2.根据iid请求详情数据
       getDetail(this.iid).then( res => {
         const data = res.result;
-
+        // console.log(data);
         //2.1获取顶部的轮播图片数据
         this.topImgs = data.itemInfo.topImages
 
         //2.2获取商品信息
         this.detailGoods = new GoodsInfo(data.itemInfo, data.columns, data.shopInfo.services)
-
+        // console.log(this.detailGoods);
         //2.3创建店铺信息
         this.shop = new Shop(data.shopInfo)
 
@@ -96,7 +99,6 @@
           this.commentInfo = data.rate.list[0];
         }
 
-        console.log(res);
       });
       this._getRecommend();
     },
@@ -104,9 +106,23 @@
       this._getOffsetTops();
     },
     methods: {
-      backTop() {
-        this.$refs.scroll.scrollTo(0,0);
-        this.$refs.scroll.refresh()
+      // 添加到购物车
+      addToCart() {
+        const product = {}
+        product.image = this.topImgs[0]
+        product.title = this.detailGoods.title
+        product.desc = this.detailGoods.desc
+        product.price = this.detailGoods.nowPrice
+        product.count = 1
+        product.checked = true
+        product.iid = this.iid
+
+        //1.返回一个Promise，addCart在vuex的actions里面
+        this.$store.dispatch( 'addCart', product).then( res => {
+          this.$toast.show(res)
+        })
+
+
       },
 
       _getOffsetTops() {
@@ -120,7 +136,7 @@
 
       contentScroll(position) {
         //1.是否显示回到顶部按钮
-        this.showBackTop = -position.y > BACKTOP_DISTANCE
+        this.isShow = -position.y > BACKTOP_DISTANCE;
         // 2.监听滚动到哪一个主题
         this._listenScrollTheme(-position.y)
       },
@@ -150,9 +166,8 @@
           }
         }
       },
-
       imageLoad() {
-        this.$refs.scroll.refresh()
+        this.$refs.scroll.refresh();
       },
       _getRecommend() {
         getRecommend().then( (res, err) => {
@@ -160,10 +175,9 @@
           this.recommendList = res.data.list;
         })
       },
-
       detailTitleClick(index) {
         this.currentIndex = index
-        this.$refs.scroll.scrollTo(0, -this.themeTops[index])
+        this.$refs.scroll.scrollTo(0, -this.themeTops[index], 300)
       }
     }
   }
@@ -179,7 +193,7 @@
 
   .content{
     width: 100%;
-    height: calc(100% - 44px);
+    height: calc(100% - 44px - 49px);
     overflow: hidden;
   }
 </style>

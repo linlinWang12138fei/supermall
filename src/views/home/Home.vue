@@ -43,18 +43,19 @@
   import TabControl from "components/content/tabCortrol/TabControl";
   import GoodsList from "components/content/goods/GoodsList";
   import Scroll from "components/common/scroll/Scroll";
-  import BackTop from "components/content/backTop/BackTop";
 
 
 
   import {getHomeMultidata, getHomeGoods} from "network/home";
 
-  import {debounce} from 'common/util'
   import {BACKTOP_DISTANCE} from 'common/const'
+
+  import {itemListenerMixin, backTopMixin} from "common/mixin";
 
 
   export default {
     name: "Home",
+    mixins: [itemListenerMixin, backTopMixin],
     data() {
       return {
         banner: [],
@@ -66,10 +67,9 @@
           'sell': {page: 0,list: []},
         },
         currentType: 'pop',//当前商品类型
-        isShow: false,
         tabOffsetTop: 0,
         isFixed: false,
-        currentPosition: 0
+        currentPosition: 0,
       }
     },
     computed: {
@@ -85,7 +85,6 @@
       TabControl,
       GoodsList,
       Scroll,
-      BackTop,
     },
     created() {//生命周期函数，创建完成时调用此方法
       //1.请求多个数据
@@ -103,23 +102,16 @@
       // this.$refs.hSwiper.startTimer();
     },
     deactivated() {
+      //1。保存Y轴位置
       this.currentPosition = this.$refs.scroll.getCurrentY();
       // console.log(this.currentPosition);
       // console.log('离开');
       // this.$store.commit('updataHCP', this.currentPosition)
       // this.$refs.hSwiper.stopTimer();
+      //2.取消全局监听事件
+      this.$bus.$off('itemImageLoad', this.itemImageListener)
     },
     mounted() {
-      //图片加载完成的事件监听
-      //防抖
-      const refresh = debounce(this.$refs.scroll.refresh, 500)
-      //监听事件总线
-      this.$bus.$on('itemImageLoad', () => {
-        // this.$refs.scroll.refresh();
-        refresh()
-      })
-
-
 
     },
     destroyed() {
@@ -131,11 +123,7 @@
       /**
        * 事件监听相关的方法
        * */
-      backTopClick() {
-        //scrollTo(x,y,毫秒);
-        this.$refs.scroll.scrollTo(0,0);
-      }
-      ,
+
       tabClick(index){
         switch (index) {
           case 0: this.currentType = 'pop';break;

@@ -4,7 +4,6 @@
     <grid-view>
       <goods-list-item v-for="(item, index) in recommendList" :key="index" :goods-item="item"></goods-list-item>
     </grid-view>
-    <div class="aaa"></div>
   </div>
 </template>
 
@@ -25,6 +24,7 @@
       GridView,
       GoodsListItem
     },
+
   }
 </script>
 
@@ -40,8 +40,4 @@
     color: #333;
   }
 
-  .aaa{
-    width: 100%;
-    height: 50px;
-  }
 </style>

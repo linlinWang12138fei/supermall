@@ -1,10 +1,11 @@
 <template>
-  <div class="goods">
-    <goods-list-item v-for="item in goods" :goods-item="item"/>
-  </div>
+    <grid-view>
+      <goods-list-item v-for="item in goods" :goods-item="item"/>
+    </grid-view>
 </template>
 
 <script>
+  import GridView from "components/common/gridView/GridView";
   import GoodsListItem from "./GoodsListItem";
   export default {
     name: "GoodsList",
@@ -23,24 +24,11 @@
     },
     components: {
       GoodsListItem,
+      GridView
     },
-    created() {
-    }
   }
 </script>
 
 <style scoped>
-  .goods{
-
-    display: flex;
-    /*设置这个之后子元素需要具体的width 或者百分比*/
-    flex-wrap: wrap;
-    /*均等分*/
-    justify-content: space-around;
-
-    padding: 2px;
-  }
-
-  /*一行显示两个*/
 
 </style>
