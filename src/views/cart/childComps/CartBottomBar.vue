@@ -4,7 +4,7 @@
       <check-button
         :value="checkAll" @click.native='selectAll'>
       </check-button>
-      <span>全选</span>
+      <span style="margin-left: 5px">全选</span>
     </div>
     <div class="totalPrice">
       合计：{{totalPrice}}
@@ -68,6 +68,8 @@
     height: 40px;
     background-color: rgba(0,0,0,.11);
     position: relative;
+    left: 0px;
+    bottom: 10px;
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -75,7 +77,7 @@
 
   .btm-check{
     display: flex;
-    width: 50px;
+    width: 60px;
   }
 
   .totalPrice{
@@ -85,10 +87,10 @@
 
   .calculate{
     width: 95px;
-    height: 40px;
+    height: 100%;
     background-color: var(--color-tint);
     text-align: center;
-    line-height: 40px;
+    line-height: 13.66667vw;
     color: #fff;
   }
 </style>

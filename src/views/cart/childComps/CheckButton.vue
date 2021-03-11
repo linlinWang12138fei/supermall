@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="icon-selector" @click="selectItem" :class="{'selector-active': value}">
-        <img src="~/assets/img/cart/tick.svg" alt="">
+        <img src="~/assets/img/cart/tick.svg" alt="" width="100%" height="100%">
       </div>
     </div>
 </template>
