@@ -46,7 +46,6 @@
       }
     },
     created() {
-      console.log('创建');
       //在这个生命周期函数中不能拿到元素
       // new BScroll('.wrapper', {});
       //1.请求左边展示的类型
@@ -147,11 +146,6 @@
 </script>
 
 <style scoped>
-  .category{
-    /*width: 100%;*/
-    /*height: 100vh;*/
-    /*height: auto;*/
-  }
   .category-content{
     display: flex;
   }
@@ -166,13 +160,4 @@
     z-index: 9;
   }
 
-  .menuListScroll{
-    width: 25vw;
-    height: calc(100% - 49px - 49px);
-    overflow: hidden;
-  }
-  .menuListScroll2{
-    width: calc(100% - 25vw);
-    height: calc(100% - 49px - 49px);
-  }
 </style>

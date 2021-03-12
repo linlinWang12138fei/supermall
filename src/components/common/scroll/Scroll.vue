@@ -41,7 +41,6 @@
       if(this.probeType === 2 || this.probeType === 3){
         this.scroll.on('scroll', position => {
           this.$emit('scroll', position);
-
         })
       }
       //监听上拉加载事件

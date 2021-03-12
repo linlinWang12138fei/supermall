@@ -1,6 +1,5 @@
 <template>
   <div class="content-bottom">
-    <tab-control :titles="['综合', '新品', '销量']" @tabClick="tabClick"/>
     <div>
       <goods-list :goods="bottomContent"/>
     </div>
@@ -8,11 +7,10 @@
 </template>
 
 <script>
-  import TabControl from "components/content/tabCortrol/TabControl";
   import GoodsList from "components/content/goods/GoodsList";
   export default {
     name: "ContentBottom",
-    components: {GoodsList, TabControl},
+    components: {GoodsList},
     props: {
       bottomContent: {
         type: Array,
@@ -22,15 +20,11 @@
       }
     },
     methods: {
-      tabClick(index) {
-        this.$bus.$emit('contentbottonclick', index)
-      }
+
     }
   }
 </script>
 
 <style scoped>
-  .content-bottom{
-    margin-top: 20px;
-  }
+
 </style>

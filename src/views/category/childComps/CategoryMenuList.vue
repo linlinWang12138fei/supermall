@@ -30,13 +30,13 @@
 <style scoped>
   .menu-list{
     width: 25vw;
-    height: auto;
+    height: 86.5vh;
     text-align: center;
     line-height: 12vw;
   }
   .content{
     width: 25vw;
-    height: 84.5vh;
+    height: 86.5vh;
     overflow: hidden;
   }
 </style>
